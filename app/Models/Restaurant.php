@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use ApiPlatform\Laravel\Eloquent\Filter\PartialSearchFilter;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\QueryParameter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
 #[ApiResource]
+#[QueryParameter(key: 'cuisine_type', filter: PartialSearchFilter::class)]
 class Restaurant extends Model
 {
     use HasFactory, Searchable, SoftDeletes;
