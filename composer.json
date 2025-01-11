@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "api-platform/laravel": "^4.0",
         "benbjurstrom/pgvector-scout": "^0.2.0",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9"
