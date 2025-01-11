@@ -39,6 +39,14 @@ class Restaurant extends Model
     ];
 
     /**
+     * @return string 
+     */
+    public function searchableAs(): string
+    {
+        return 'openai'; // This would result in the index name: openai_restaurants
+    }
+
+    /**
      * Get the indexable data array for the model.
      *
      * @return array<string, mixed>
