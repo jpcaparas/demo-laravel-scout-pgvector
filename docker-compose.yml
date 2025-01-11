@@ -25,7 +25,9 @@ services:
             - pgsql
             - redis
     pgsql:
-        image: 'postgres:17'
+        build:
+            context: './docker/pgsql'
+            dockerfile: Dockerfile
         ports:
             - '${FORWARD_DB_PORT:-5432}:5432'
         environment:
