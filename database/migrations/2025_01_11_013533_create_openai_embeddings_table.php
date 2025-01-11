@@ -29,7 +29,7 @@ return new class extends Migration
         });
 
         // Create HNSW index on the vector column
-        DB::statement("CREATE INDEX openai_embeddings_vector_idx ON openai_embeddings USING hnsw (vector vector_cosine_ops)");
+        DB::statement('CREATE INDEX openai_embeddings_vector_idx ON openai_embeddings USING hnsw (vector vector_cosine_ops)');
         // https://platform.openai.com/docs/guides/embeddings#which-distance-function-should-i-use
     }
 

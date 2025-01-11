@@ -12,7 +12,7 @@ class RestaurantFactory extends Factory
 {
     public function definition(): array
     {
-        $name = $this->faker->company() . ' ' . $this->faker->randomElement(['Restaurant', 'Bistro', 'Grill', 'Café', 'Diner']);
+        $name = $this->faker->company().' '.$this->faker->randomElement(['Restaurant', 'Bistro', 'Grill', 'Café', 'Diner']);
         $cuisineTypes = ['Italian', 'Japanese', 'Mexican', 'Indian', 'American', 'French', 'Chinese', 'Thai', 'Mediterranean', 'Greek'];
 
         return [

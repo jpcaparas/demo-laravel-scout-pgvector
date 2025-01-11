@@ -9,7 +9,7 @@ use Laravel\Scout\Searchable;
 
 class Restaurant extends Model
 {
-    use HasFactory, SoftDeletes, Searchable;
+    use HasFactory, Searchable, SoftDeletes;
 
     protected $fillable = [
         'name',
@@ -27,7 +27,7 @@ class Restaurant extends Model
         'rating',
         'accepts_reservations',
         'opening_hours',
-        'facilities'
+        'facilities',
     ];
 
     protected $casts = [
@@ -38,9 +38,6 @@ class Restaurant extends Model
         'facilities' => 'array',
     ];
 
-    /**
-     * @return string 
-     */
     public function searchableAs(): string
     {
         return 'openai'; // This would result in the index name: openai_restaurants
