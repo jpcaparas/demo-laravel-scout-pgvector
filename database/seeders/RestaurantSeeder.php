@@ -9,6 +9,10 @@ class RestaurantSeeder extends Seeder
 {
     public function run(): void
     {
+        // This prevents the model from syncing to the search index
+        // We would prefer that the user manually triggers the syncing with the `php artisan scout:import` command
+        Restaurant::disableSearchSyncing();
+
         Restaurant::factory(10)->create();
 
         // Create some specific restaurants
@@ -42,5 +46,7 @@ class RestaurantSeeder extends Seeder
         foreach ($specificRestaurants as $restaurant) {
             Restaurant::factory()->create($restaurant);
         }
+
+        Restaurant::enableSearchSyncing();
     }
 }
