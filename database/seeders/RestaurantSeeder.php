@@ -9,7 +9,7 @@ class RestaurantSeeder extends Seeder
 {
     public function run(): void
     {
-        Restaurant::factory(100)->create();
+        Restaurant::factory(10)->create();
 
         // Create some specific restaurants
         $specificRestaurants = [
