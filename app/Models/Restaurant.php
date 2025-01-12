@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use ApiPlatform\Metadata\Get;
-use ApiPlatform\Metadata\QueryParameter;
+use App\Http\Requests\RestaurantSearchFormRequest;
 use App\State\Provider\RestaurantSearchProvider;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -13,16 +13,7 @@ use Laravel\Scout\Searchable;
 #[Get(
     uriTemplate: '/restaurants/search',
     provider: RestaurantSearchProvider::class,
-    parameters: [
-        'q' => new QueryParameter(
-            key: 'q',
-            description: 'Search query',
-            required: true,
-            schema: [
-                'type' => 'string',
-            ],
-        ),
-    ],
+    rules: RestaurantSearchFormRequest::class,
 )]
 class Restaurant extends Model
 {
