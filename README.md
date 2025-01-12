@@ -1,17 +1,78 @@
-# Similarity Search with Laravel Scout and pgvector
+# Laravel Scout `pgvector` Demo
 
-- First off, I want to thank Ben Bjurstrom for creating the `pgvector-scout` package. This package is a Laravel Scout driver for the `pgvector` extension, which isn't supported out of the box by Laravel Scout.
-- This project is meant to be demo'ed using Laravel Sail
-- This project demonstrates the use of `pgvector` driven similarity search in Laravel Scout using the `pgvector-scout` package.
-- This project uses the `openai` API to generate vectors for the `Restaurant` model. The `openai` API is not free, so you will need to supply your own API key.
-- When running scout searches, the `pgvector-scout` package will use the `pgvector` extension to perform similarity searches on the `vector` column of the `Restaurant` model. This will then make calls to the `openai` API to generate vectors for the search query and then perform the similarity search in the database.
-- Copy the `.env.example` to `.env`. Most, if not all, the defaults should work out of the box with Laravel Sail.
-- Supply an `OPENAI_API_KEY` in the `.env`
-- Run `./vendor/bin/sail up`
-- Run `sail artisan key:generate`
-- Run `sail artisan migrate:fresh --seed`
-- On a separate TTY, run `sail artisan queue:work --queue=scout,default` (this can be made faster with Horizon)
-- On a separate TTY, run `sail artisan scout:import "App\Models\Restaurant"`
-- Enter a Tinker REPL with `sail artisan tinker`
-- Run `App\Models\Restaurant::search('Nigiri')->get()` and you should see a Sushi restaurant because _Nigiri_ is a type of Sushi. Even though _Nigiri_ is not in the name of the restaurant, the similarity search will return it because the `openai` API will generate a vector for _Nigiri_ and the similarity search will find the closest match in the database.
-- Likewise, running `App\Models\Restaurant::search('Windy City')->get()` will return a Chicago-style pizza restaurant called _Mama's Kitchen_, as _Windy City_ is a nickname for Chicago, and the openai API will generate a vector for _Windy City_ and the similarity search will find the closest match in the database.
+A demonstration of semantic similarity search in Laravel using pgvector, OpenAI embeddings, and Laravel Scout.
+
+## 🚀 Features
+
+- Semantic search powered by pgvector and OpenAI embeddings
+- Full Laravel Scout integration
+- Restaurant search demo with intelligent matching
+- Docker-ready with Laravel Sail
+
+## ⚡️ Quick Start
+
+1. Clone the repository
+2. Copy configuration file:
+   ```sh
+   cp .env.example .env
+   ```
+
+3. Add your OpenAI API key to .env:
+   ```
+   OPENAI_API_KEY=your-key-here
+   ```
+
+4. Start the containers:
+   ```sh
+   ./vendor/bin/sail up -d
+   ```
+
+5. Initialize the application:
+   ```sh
+   sail artisan key:generate
+   sail artisan migrate:fresh --seed
+   ```
+
+6. Start the queue worker:
+   ```sh
+   sail artisan queue:work --queue=scout,default
+   ```
+
+7. Import the restaurant data:
+   ```sh
+   sail artisan scout:import "App\Models\Restaurant"
+   ```
+
+## 🔍 Demo Examples
+
+Start a Tinker session:
+```sh
+sail artisan tinker
+```
+
+Try these semantic searches:
+
+```php
+// Find sushi restaurants by searching for a sushi type
+App\Models\Restaurant::search('Nigiri')->get();
+
+// Find Chicago restaurants using the city's nickname
+App\Models\Restaurant::search('Windy City')->get();
+```
+
+The searches will return relevant results even when the exact terms don't appear in the restaurant names, thanks to semantic matching via OpenAI's embeddings.
+
+## 🙏 Acknowledgments
+
+Special thanks to Ben Bjurstrom for creating the [pgvector-scout](https://github.com/pgvector/pgvector-scout) package that powers this demo.
+
+## 📝 Requirements
+
+- Docker
+- OpenAI API key
+
+## 📖 How It Works
+
+The application uses OpenAI's API to generate vector embeddings for restaurant data. These embeddings are stored using PostgreSQL's pgvector extension, enabling semantic similarity searches through Laravel Scout.
+
+When you search, the query text is converted to a vector embedding and pgvector finds the closest matches in the database, allowing for intelligent, meaning-based searches rather than simple text matching.
