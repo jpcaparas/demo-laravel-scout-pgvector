@@ -1,12 +1,15 @@
 {
-    "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "name": "laravel/pgvector-scout-demo",
+    "description": "A demonstration of semantic similarity search in Laravel using pgvector, OpenAI embeddings, and Laravel Scout.",
     "keywords": [
         "laravel",
-        "framework"
+        "pgvector",
+        "scout",
+        "openai",
+        "embeddings",
+        "semantic-search"
     ],
+    "type": "project",
     "license": "MIT",
     "require": {
         "php": "^8.2",
