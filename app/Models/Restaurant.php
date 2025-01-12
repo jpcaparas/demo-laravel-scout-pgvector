@@ -6,7 +6,9 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use App\Http\Requests\RestaurantChatFormRequest;
 use App\Http\Requests\RestaurantSearchFormRequest;
+use App\State\RestaurantChatStateProcessor;
 use App\State\RestaurantSearchStateProcessor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -22,6 +24,11 @@ use Laravel\Scout\Searchable;
             uriTemplate: '/restaurants/search',
             rules: RestaurantSearchFormRequest::class,
             processor: RestaurantSearchStateProcessor::class,
+        ),
+        new Post(
+            uriTemplate: '/restaurants/chat',
+            rules: RestaurantChatFormRequest::class,
+            processor: RestaurantChatStateProcessor::class,
         ),
     ],
 )]
