@@ -65,6 +65,8 @@ The searches will return relevant results even when the exact terms don't appear
 
 ## 🔌 API Endpoints
 
+<img width="704" alt="image" src="https://github.com/user-attachments/assets/48b86205-2d14-4d1e-9495-114196027cb0" />
+
 Once the application is running, you can access the API Platform interface at `http://laravel.test/api` to try out these endpoints:
 
 ### Search Restaurants
