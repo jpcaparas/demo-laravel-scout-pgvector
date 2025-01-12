@@ -2,18 +2,18 @@
 
 namespace App\Models;
 
-use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
 use App\Http\Requests\RestaurantSearchFormRequest;
-use App\State\Provider\RestaurantSearchProvider;
+use App\State\RestaurantSearchStateProcessor;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-#[Get(
+#[Post(
     uriTemplate: '/restaurants/search',
-    provider: RestaurantSearchProvider::class,
     rules: RestaurantSearchFormRequest::class,
+    processor: RestaurantSearchStateProcessor::class,
 )]
 class Restaurant extends Model
 {
