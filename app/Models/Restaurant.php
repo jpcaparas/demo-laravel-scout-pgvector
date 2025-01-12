@@ -21,8 +21,8 @@ use Laravel\Scout\Searchable;
 #[ApiResource(
     paginationItemsPerPage: 10,
     operations: [
-        new Get(),
-        new GetCollection(),
+        new Get,
+        new GetCollection,
         new Post(
             uriTemplate: '/restaurants/search',
             rules: RestaurantSearchFormRequest::class,
