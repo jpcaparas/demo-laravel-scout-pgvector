@@ -2,24 +2,28 @@
 
 namespace App\Models;
 
-use ApiPlatform\Laravel\Eloquent\Filter\PartialSearchFilter;
-use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\QueryParameter;
+use App\State\Provider\RestaurantSearchProvider;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-#[ApiResource(
-    paginationEnabled: true,
-    paginationItemsPerPage: 5,
-    operations: [
-        new GetCollection()
-    ]
+#[Get(
+    uriTemplate: '/restaurants/search',
+    provider: RestaurantSearchProvider::class,
+    parameters: [
+        'q' => new QueryParameter(
+            key: 'q',
+            description: 'Search query',
+            required: true,
+            schema: [
+                'type' => 'string',
+            ],
+        ),
+    ],
 )]
-#[QueryParameter(key: 'cuisine_type', filter: PartialSearchFilter::class)]
-#[QueryParameter(key: 'name', filter: PartialSearchFilter::class)]
 class Restaurant extends Model
 {
     use HasFactory, Searchable, SoftDeletes;
