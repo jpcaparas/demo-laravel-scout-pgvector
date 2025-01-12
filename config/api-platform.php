@@ -19,7 +19,9 @@ return [
     ],
 
     'formats' => [
-        'jsonld' => ['application/ld+json'],
+        'json' => ['application/json'],
+        'text/streeaming' => ['text/event-stream'], // The chat response format
+        // 'jsonld' => ['application/ld+json'],
         // 'jsonapi' => ['application/vnd.api+json'],
         // 'csv' => ['text/csv'],
     ],
