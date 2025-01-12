@@ -75,6 +75,40 @@ use function PHPSTORM_META\override;
             uriTemplate: '/restaurants/chat',
             rules: RestaurantChatFormRequest::class,
             processor: RestaurantChatStateProcessor::class,
+            openapi: new Operation(
+                summary: 'Chat with a restaurant concierge assistant',
+                requestBody: new RequestBody(content: new ArrayObject(
+                    [
+                        'application/json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'message' => [
+                                        'type' => 'string',
+                                        'example' => 'Give me a sushi restaurant suggestion',
+                                        'description' => 'The message to send to the restaurant concierge assistant',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ]
+                    )),
+                responses: [
+                    200 => [
+                        'description' => 'Chat response',
+                        'content' => [
+                            'text/event-stream' => [
+                                'schema' => [
+                                    'type' => 'string',
+                                ],
+                            ],
+                        ],
+                    ],
+                    201 => [
+                        'description' => 'Invalid input', // It's impossible to remove this response at the moment with API platform
+                    ],
+                ],
+            ),
         ),
     ],
 )]
