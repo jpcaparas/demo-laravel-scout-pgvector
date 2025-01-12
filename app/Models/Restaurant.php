@@ -6,14 +6,19 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\OpenApi\Model\Operation;
+use ApiPlatform\OpenApi\Model\RequestBody;
 use App\Http\Requests\RestaurantChatFormRequest;
 use App\Http\Requests\RestaurantSearchFormRequest;
 use App\State\RestaurantChatStateProcessor;
 use App\State\RestaurantSearchStateProcessor;
+use ArrayObject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
+
+use function PHPSTORM_META\override;
 
 /**
  * @todo Fix swagger-generated docs
@@ -23,10 +28,48 @@ use Laravel\Scout\Searchable;
     operations: [
         new Get,
         new GetCollection,
+        // https://api-platform.com/docs/core/openapi/#:~:text=Overriding%20the%20OpenAPI%20Specification
         new Post(
             uriTemplate: '/restaurants/search',
             rules: RestaurantSearchFormRequest::class,
             processor: RestaurantSearchStateProcessor::class,
+            openapi: new Operation(
+                summary: 'Search for restaurants',
+                requestBody: new RequestBody(content: new ArrayObject(
+                    [
+                        'application/json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'query' => [
+                                        'type' => 'string',
+                                        'example' => 'Italian',
+                                        'description' => 'The search query to find restaurants',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ]
+                    )),
+                responses: [
+                    200 => [
+                        'description' => 'Search results',
+                        'content' => [
+                            'application/json' => [
+                                'schema' => [
+                                    'type' => 'array',
+                                    'items' => [
+                                        '$ref' => '#/components/schemas/Restaurant',
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
+                    201 => [
+                        'description' => 'Invalid input', // It's impossible to remove this response at the moment with API platform
+                    ],
+                ],
+            ),
         ),
         new Post(
             uriTemplate: '/restaurants/chat',
