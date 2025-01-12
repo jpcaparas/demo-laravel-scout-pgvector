@@ -34,7 +34,8 @@ use function PHPSTORM_META\override;
             rules: RestaurantSearchFormRequest::class,
             processor: RestaurantSearchStateProcessor::class,
             openapi: new Operation(
-                summary: 'Search for restaurants',
+                summary: 'Search for Restaurants.',
+                description: 'Search for Restaurants.',
                 requestBody: new RequestBody(content: new ArrayObject(
                     [
                         'application/json' => [
@@ -76,7 +77,8 @@ use function PHPSTORM_META\override;
             rules: RestaurantChatFormRequest::class,
             processor: RestaurantChatStateProcessor::class,
             openapi: new Operation(
-                summary: 'Chat with a restaurant concierge assistant',
+                summary: 'Chat with Restaurant data.',
+                description: 'Chat with Restaurant data.',
                 requestBody: new RequestBody(content: new ArrayObject(
                     [
                         'application/json' => [

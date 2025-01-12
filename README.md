@@ -62,6 +62,35 @@ App\Models\Restaurant::search('Windy City')->get();
 
 The searches will return relevant results even when the exact terms don't appear in the restaurant names, thanks to semantic matching via OpenAI's embeddings.
 
+## 🔌 API Endpoints
+
+Once the application is running, you can access the API Platform interface at `http://laravel.test/api` to try out these endpoints:
+
+### Search Restaurants
+`POST /api/restaurants/search`
+```json
+{
+  "query": "Italian"
+}
+```
+This endpoint lets you perform semantic searches for restaurants based on cuisine, city, or other attributes.
+
+### Chat with Restaurant data
+`POST /api/restaurants/chat`
+```json
+{
+  "message": "Give me a sushi restaurant suggestion"
+}
+```
+
+This endpoint provides an AI-powered restaurant chatbot (provided you supply an OpenAI key) that can give personalised recommendations.
+
+Additional endpoints:
+- `GET /api/restaurants`: List all restaurants
+- `GET /api/restaurants/{id}`: Get details of a specific restaurant
+
+All endpoints are fully documented in the API Platform interface with example requests and responses.
+
 ## 🙏 Acknowledgments
 
 Special thanks to Ben Bjurstrom for creating the [pgvector-scout](https://github.com/pgvector/pgvector-scout) package that powers this demo.
