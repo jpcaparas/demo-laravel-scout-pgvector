@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
+/**
+ * @todo Fix swagger-generated docs
+ */
 #[ApiResource(
     paginationItemsPerPage: 10,
     operations: [
