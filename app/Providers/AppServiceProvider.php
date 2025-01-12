@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
+use ApiPlatform\State\ProcessorInterface;
 use App\State\RestaurantSearchStateProcessor;
 use Illuminate\Support\ServiceProvider;
-use Monolog\Processor\ProcessorInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
