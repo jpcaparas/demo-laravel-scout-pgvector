@@ -13,7 +13,8 @@
         "api-platform/laravel": "^4.0",
         "benbjurstrom/pgvector-scout": "^0.2.0",
         "laravel/framework": "^11.31",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "openai-php/laravel": "^0.10.2"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
