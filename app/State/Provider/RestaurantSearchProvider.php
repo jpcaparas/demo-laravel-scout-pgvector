@@ -1,7 +1,5 @@
 <?php
 
-// app/State/Provider/RestaurantSearchProvider.php
-
 namespace App\State\Provider;
 
 use ApiPlatform\Metadata\Operation;
