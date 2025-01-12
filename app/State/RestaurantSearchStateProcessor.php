@@ -8,6 +8,9 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use App\Models\Restaurant;
 
+/**
+ * @todo Pagination param ingestion
+ */
 final class RestaurantSearchStateProcessor implements ProcessorInterface
 {
     public function __construct() {}
@@ -17,7 +20,6 @@ final class RestaurantSearchStateProcessor implements ProcessorInterface
         $query = request()->json()->get('query');
 
         return response()->json(Restaurant::search($query)
-            ->orderByDesc('_score')
-            ->paginate());
+            ->orderByDesc('_score')->get());
     }
 }

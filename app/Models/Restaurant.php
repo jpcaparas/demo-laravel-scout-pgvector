@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use App\Http\Requests\RestaurantSearchFormRequest;
 use App\State\RestaurantSearchStateProcessor;
@@ -10,10 +13,17 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
-#[Post(
-    uriTemplate: '/restaurants/search',
-    rules: RestaurantSearchFormRequest::class,
-    processor: RestaurantSearchStateProcessor::class,
+#[ApiResource(
+    paginationItemsPerPage: 10,
+    operations: [
+        new Get(),
+        new GetCollection(),
+        new Post(
+            uriTemplate: '/restaurants/search',
+            rules: RestaurantSearchFormRequest::class,
+            processor: RestaurantSearchStateProcessor::class,
+        ),
+    ],
 )]
 class Restaurant extends Model
 {

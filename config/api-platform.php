@@ -19,8 +19,8 @@ return [
     ],
 
     'formats' => [
-        'jsonld' => ['application/ld+json'],
         'json' => ['application/json'],
+        // 'jsonld' => ['application/ld+json'],
         // 'jsonapi' => ['application/vnd.api+json'],
         // 'csv' => ['text/csv'],
     ],
