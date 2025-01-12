@@ -8,6 +8,7 @@ A demonstration of semantic similarity search in Laravel using pgvector, OpenAI 
 - Full Laravel Scout integration
 - Restaurant search demo with intelligent matching
 - Docker-ready with Laravel Sail
+- An API Platform interface for easy testing
 
 ## ⚡️ Quick Start
 
